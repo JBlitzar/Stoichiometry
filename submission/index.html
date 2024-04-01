@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="ptable_raw.js"></script>
     <!--Math.js-->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.1/math.js"
@@ -33,6 +34,22 @@
       crossorigin="anonymous"
       onload="renderMathInElement(document.body);"
     ></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+              // customised options
+              // • auto-render specific keys, e.g.:
+              delimiters: [
+                  {left: '$$', right: '$$', display: true},
+                  {left: '$', right: '$', display: false},
+                  {left: '\\(', right: '\\)', display: false},
+                  {left: '\\[', right: '\\]', display: true}
+              ],
+              // • rendering keys, e.g.:
+              throwOnError : false
+            });
+        });
+    </script>
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -40,36 +57,11 @@
   <body>
     <h1>Stoichiometry</h1>
     <br>
-    <center>
-      <form action="/submission/index.html">
-        <label for="equation">Chemical equation:</label><br>
-        <input type="text" id="equation" name="equation" value="CH4+O2->CO2+H2O"><br>
-        <label>Solving...</label><br><br>
-
-
-        <label for="stoichFromUnits">From</label>
-        <select id="stoichFromUnits" name="stoichFromUnits">
-          <option value="gas">L of Gas (at STP)</option>
-          <option value="particles">Representative particles</option>
-          <option value="mol">Moles</option>
-          <option value="mass">Mass (g)</option>
-        </select>
-        <input type="text" id="stoichFromMolecule" name="stoichFromMolecule" value="CH4">
-
-
-
-        <label for="stoichToUnits">To</label>
-        <select id="stoichToUnits" name="stoichToUnits">
-          <option value="gas">L of Gas (at STP)</option>
-          <option value="particles">Representative particles</option>
-          <option value="mol">Moles</option>
-          <option value="mass">Mass (g)</option>
-        </select>
-        <input type="text" id="stoichToMolecule" name="stoichToMolecule" value="H2O"><br>
-
-        <input type="submit" value="Go">
-
-      </form>
+    <text id="math"></text>
+    
   </center>
   </body>
+  <script src="mole.js"></script>
+  <script src="balance_equation.js"></script>
+
 </html>
