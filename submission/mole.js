@@ -90,7 +90,7 @@ class Mole {
   }
   from_mass(mass) {
     this.amt = mass / this.molar_mass;
-    this.equ_prefix += `${mass}\\ \\mathrm{g\\ ${this.lname}}\\cdot\\frac{1 \\mathrm{mol\\ ${this.lname}}}{${this.molar_mass} g}`;
+    this.equ_prefix += `${mass}\\ \\mathrm{g\\ ${this.lname}}\\cdot\\frac{1 \\mathrm{mol\\ ${this.lname}}}{${this.molar_mass}\\ \\mathrm{g}}`;
   }
 
   to_particles() {
