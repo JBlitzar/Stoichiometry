@@ -61,7 +61,7 @@ class Mole {
     this.molar_mass = 0;
     this.calc_molar_mass();
     this.lname = this.name.replace(/\d+/g, function (match) {
-      return "_" + match;
+      return "_{" + match+"}";
     });
   }
 
@@ -99,27 +99,27 @@ class Mole {
     this.equ_prefix += `${mass}\\ \\mathrm{g\\ ${this.lname}}\\cdot\\frac{1 \\mathrm{mol\\ ${this.lname}}}{${this.molar_mass}\\ \\mathrm{g}}`;
   }
 
-  to_particles() {
+  to_particles(inp) {
     this.equ_prefix += `\\cdot\\frac{6.022*10^{23}\\ \\mathrm{particles}}{1\\ \\mathrm{mol\\ ${this.lname}}}`;
     return `${mathify(
-      this.amt * 6.022 * Math.pow(10, 23)
+        matchPrecision(inp, this.amt * 6.022 * Math.pow(10, 23))
     )}\\ \\mathrm{particles\\ ${this.lname}}`;
   }
 
-  to_mass() {
+  to_mass(inp) {
     this.equ_prefix += `\\cdot\\frac{${this.molar_mass} g}{1 \\mathrm{mol\\ ${this.lname}}}`;
-    return `${this.molar_mass * this.amt}\\ \\mathrm{g\\ ${this.lname}}`;
+    return `${matchPrecision(inp, this.molar_mass * this.amt)}\\ \\mathrm{g\\ ${this.lname}}`;
   }
 
-  to_stp() {
+  to_stp(inp) {
     this.equ_prefix += `\\cdot\\frac{22.4 \\mathrm{L\\ STP}}{1 \\mathrm{mol\\ ${this.lname}}}`;
-    return `${this.amt * 22.4}\\ \\mathrm{L\\ ${this.lname}\\ STP}`;
+    return `${matchPrecision(inp, this.amt * 22.4)}\\ \\mathrm{L\\ ${this.lname}\\ STP}`;
   }
 
-  to_arbitrary_gas(temperature, pressure) {
+  to_arbitrary_gas(inp, temperature, pressure) {
     this.equ_prefix += 
     `\\cdot\\frac{\\frac{(0.08205\\ \\frac{\\mathrm{L}\\cdot\\mathrm{atm}}{\\mathrm{mol}\\cdot\\mathrm{K}} \\cdot ${temperature}\\ \\mathrm{K})}{${pressure}\\ \\mathrm{atm}} \\mathrm{L}}{1\\ \\mathrm{mol\\ ${this.lname}}}`;
-    return `${this.amt * 0.08205 * temperature / pressure}\\ \\mathrm{L\\ ${this.lname}}`;
+    return `${matchPrecision(inp, this.amt * 0.08205 * temperature / pressure)}\\ \\mathrm{L\\ ${this.lname}}`;
   }
 
 

@@ -16,11 +16,14 @@ parts = balanced_equation
 console.log(parts);
 result_obj = {};
 parts.forEach((part) => {
-  if ("23456789".includes(part[0])) {
-    result_obj[part.slice(1).trim()] = parseInt(part[0]);
-  } else {
+    //https://regexr.com/7uc5a
+   let matches = part.match(/(\d+)(\D\d+[a-zA-Z]*)/)
+   if(matches){
+    result_obj[matches[2]] = parseInt(matches[1]);
+   }
+   else{
     result_obj[part] = 1;
-  }
+   }
 });
 console.log(result_obj);
 
@@ -47,13 +50,13 @@ firstMole.to_other_mole(
 solved_result = "";
 out_dtype = getParam("stoichToUnits");
 if (out_dtype == "gas") {
-  solved_result = secondMole.to_stp(getParam("stoichFromAmt"));
+  solved_result = secondMole.to_stp(getParam("stoichFromAmt"),getParam("stoichFromAmt"));
 } else if (out_dtype == "particles") {
-  solved_result = secondMole.to_particles(getParam("stoichFromAmt"));
+  solved_result = secondMole.to_particles(getParam("stoichFromAmt"),getParam("stoichFromAmt"));
 } else if (out_dtype == "mass") {
-  solved_result = secondMole.to_mass(getParam("stoichFromAmt"));
+  solved_result = secondMole.to_mass(getParam("stoichFromAmt"),getParam("stoichFromAmt"));
 }else if (out_dtype=="gas_general"){
-    solved_result = secondMole.to_arbitrary_gas(getParam("temp"), getParam("pressure"))
+    solved_result = secondMole.to_arbitrary_gas(getParam("stoichFromAmt"),getParam("temp"), getParam("pressure"))
 } else {
   solved_result = secondMole.amt + "\\ \\mathrm{mol}";
 }
