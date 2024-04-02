@@ -51,6 +51,9 @@ class Mole {
     console.log(this.elementDict);
     this.molar_mass = 0;
     this.calc_molar_mass();
+    this.lname = this.name.replace(/\d+/g, function (match) {
+      return "_" + match;
+    });
   }
 
   calc_molar_mass() {
@@ -66,41 +69,41 @@ class Mole {
 
   from_particles(num_particles) {
     this.amt = num_particles / (6.022 * Math.pow(10, 23));
-    this.equ_prefix += `${num_particles} \\mathrm{particles\\ ${this.name}}\\cdot\\frac{1 \\mathrm{mol\\ ${this.name}}}{6.022\\cdot10^{23} particles}`;
+    this.equ_prefix += `${num_particles}\\ \\mathrm{particles\\ ${this.lname}}\\cdot\\frac{1 \\mathrm{mol\\ ${this.lname}}}{6.022\\cdot10^{23}\\ \\mathrm{particles}}`;
   }
   from_stp(liters) {
     this.amt = liters / 22.4;
-    this.equ_prefix += `${liters} \\mathrm{L\\ STP\\ ${this.name}}\\cdot\\frac{1 \\mathrm{mol\\ ${this.name}}}{22.4 \\mathrm{L\\ STP}}`;
+    this.equ_prefix += `${liters}\\ \\mathrm{L\\ STP\\ ${this.lname}}\\cdot\\frac{1 \\mathrm{mol\\ ${this.lname}}}{22.4 \\mathrm{L\\ STP}}`;
   }
   from_mass(mass) {
     this.amt = mass / this.molar_mass;
-    this.equ_prefix += `${mass} \\mathrm{g\\ ${this.name}}\\cdot\\frac{1 \\mathrm{mol\\ ${this.name}}}{${this.molar_mass} g}`;
+    this.equ_prefix += `${mass}\\ \\mathrm{g\\ ${this.lname}}\\cdot\\frac{1 \\mathrm{mol\\ ${this.lname}}}{${this.molar_mass} g}`;
   }
 
   to_particles() {
-    this.equ_prefix += `\\cdot\\frac{6.022*10^{23} particles}{1 \\mathrm{mol\\ ${this.name}}}`;
-    return `${this.amt * 6.022 * Math.pow(10, 23)} \\mathrm{particles\\ ${
-      this.name
+    this.equ_prefix += `\\cdot\\frac{6.022*10^{23}\\ \\mathrm{particles}}{1 \\mathrm{mol\\ ${this.lname}}}`;
+    return `${this.amt * 6.022 * Math.pow(10, 23)}\\ \\mathrm{particles\\ ${
+      this.lname
     }}`;
   }
 
   to_mass() {
-    this.equ_prefix += `\\cdot\\frac{${this.molar_mass} g}{1 \\mathrm{mol\\ ${this.name}}}`;
-    return `${this.molar_mass * this.amt} \\mathrm{g\\ ${this.name}}`;
+    this.equ_prefix += `\\cdot\\frac{${this.molar_mass} g}{1 \\mathrm{mol\\ ${this.lname}}}`;
+    return `${this.molar_mass * this.amt}\\ \\mathrm{g\\ ${this.lname}}`;
   }
 
   to_stp() {
-    this.equ_prefix += `\\cdot\\frac{22.4 \\mathrm{L\\ STP}}{1 \\mathrm{mol\\ ${this.name}}}`;
-    return `${this.amt * 22.4} \\mathrm{L\\ ${this.name}\\ STP}`;
+    this.equ_prefix += `\\cdot\\frac{22.4 \\mathrm{L\\ STP}}{1 \\mathrm{mol\\ ${this.lname}}}`;
+    return `${this.amt * 22.4}\\ \\mathrm{L\\ ${this.lname}\\ STP}`;
   }
 
   to_other_mole(other, me_amount, other_amount) {
-    this.equ_prefix += `\\cdot\\frac{${other_amount} \\mathrm{mol ${other.name}}}{${me_amount} \\mathrm{mol\\ ${this.name}}}`;
+    this.equ_prefix += `\\cdot\\frac{${other_amount}\\ \\mathrm{mol\\ ${other.name}}}{${me_amount}\\ \\mathrm{mol\\ ${this.lname}}}`;
     var other_moles = (this.amt * other_amount) / me_amount;
     other.amt = other_moles;
     other.equ_prefix = this.equ_prefix;
 
-    return `${other.amt} mol ${other.name}`;
+    return `${other.amt}\\ \\mathrm{mol\\ ${other.name}}`;
   }
 }
 

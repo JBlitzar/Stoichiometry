@@ -51,7 +51,7 @@ if (out_dtype == "gas") {
 } else if (out_dtype == "mass") {
   solved_result = secondMole.to_mass(getParam("stoichFromAmt"));
 } else {
-  solved_result = secondMole.amt + " mol";
+  solved_result = secondMole.amt + "\\ \\mathrm{mol}";
 }
 
 document.getElementById(
