@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!--Decimal.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/10.3.1/decimal.min.js" integrity="sha384-gVWz9cFFtyxE49hKK7MejNS5GgBB5CdxEBus/JNi5YNe5OjYraoz49fKSTf5ceoe" crossorigin="anonymous"></script>
+
     <!--Math.js-->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.1/math.js"
@@ -59,10 +62,12 @@
         <label for="stoichFromUnits">From</label>
         <input type="text" id="stoichFromAmt" name="stoichFromAmt" value="2" />
         <select id="stoichFromUnits" name="stoichFromUnits">
+          <option value="gas_general">L of Gas (at variable temperature and pressure)</option>
           <option value="gas">L of Gas (at STP)</option>
           <option value="particles">Representative particles</option>
           <option value="mol">Moles</option>
           <option value="mass">Mass (g)</option>
+          
         </select>
         <input
           type="text"
@@ -73,10 +78,12 @@
 
         <label for="stoichToUnits">To</label>
         <select id="stoichToUnits" name="stoichToUnits">
+          <option value="gas_general">L of Gas (at variable temperature and pressure)</option>
           <option value="gas">L of Gas (at STP)</option>
           <option value="particles">Representative particles</option>
           <option value="mol">Moles</option>
           <option value="mass">Mass (g)</option>
+
         </select>
         <input
           type="text"
@@ -84,6 +91,22 @@
           name="stoichToMolecule"
           value="H2O"
         /><br />
+
+        <label for="temp">Gas temperature (K)</label>
+        <input
+          type="text"
+          id="temp"
+          name="temp"
+          value="273"
+        />
+        <label for="pressure">Gas pressure (atm)</label>
+        <input
+          type="text"
+          id="pressure"
+          name="pressure"
+          value="1"
+        /><br />
+
 
         <input type="submit" value="Go" />
       </form>

@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style>
+      .katex { 
+        font-size: 1.7em !important; 
+      }
+    </style>
     <script src="ptable_raw.js"></script>
+    <!--Decimal.js-->
+    <script src="https://cdn.jsdelivr.net/gh/MikeMcl/decimal.js@master/decimal.js" integrity="sha256-J/kaSl56i21J9fz2BlO2/zxfgzevwDkIus0OJy/UaUo=" crossorigin="anonymous"></script>
     <!--Math.js-->
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/12.4.1/math.js"
@@ -57,6 +64,19 @@
   <body>
     <h1>Stoichiometry</h1>
     <br>
+    <h2>Balance Equation</h2>
+    <br>
+    <text id="balanced_equation"></text>
+    <br>
+    <div id="gas_constant_calculations_container">
+      <h2>Get gas constant</h2>
+      <br>
+      <text id="gas_constant_calculations"></text>
+
+    </div>
+    
+    <br>
+    <h2>Solve Dimensional Analysis with the Mole Map</h2>
     <text id="math"></text>
     
   </center>
@@ -64,4 +84,5 @@
   <script src="mole.js"></script>
   <script src="balance_equation.js"></script>
 <script src="solver.js"></script>
+<script src="balance_equation_ui.js"></script>
 </html>

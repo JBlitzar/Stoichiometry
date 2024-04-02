@@ -32,6 +32,8 @@ if (dtype == "gas") {
   firstMole.from_particles(getParam("stoichFromAmt"));
 } else if (dtype == "mass") {
   firstMole.from_mass(getParam("stoichFromAmt"));
+} else if(dtype == "gas_general"){
+    firstMole.from_arbitrary_gas(getParam("stoichFromAmt"), getParam("temp"),getParam("pressure"))
 } else {
   firstMole.amt = getParam("stoichFromAmt");
 }
@@ -50,6 +52,8 @@ if (out_dtype == "gas") {
   solved_result = secondMole.to_particles(getParam("stoichFromAmt"));
 } else if (out_dtype == "mass") {
   solved_result = secondMole.to_mass(getParam("stoichFromAmt"));
+}else if (out_dtype=="gas_general"){
+    solved_result = secondMole.to_arbitrary_gas(getParam("temp"), getParam("pressure"))
 } else {
   solved_result = secondMole.amt + "\\ \\mathrm{mol}";
 }

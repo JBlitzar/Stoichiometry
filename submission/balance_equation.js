@@ -92,12 +92,27 @@ function balanceEquation(reactants, products) {
   b.fill(1, b.length - i);
 
   let x = math.lusolve(matrix, b)._data;
-  if (x.some((val) => !isInt(val))) {
-    x = x.map((val) => val * 2);
-  }
-  if (x.some((val) => !isInt(val))) {
-    x = x.map((val) => val * 3);
-  }
+  let commonMult = 1;
+  x.forEach((val)=>{
+
+    if(!isInt(val * commonMult)){
+      console.log((val * commonMult) % 1)
+      frac = math.fraction((val * commonMult) % 1)
+
+      
+      commonMult *= frac.d
+      
+      console.log(commonMult)
+      
+    }
+  })
+  x = x.map((val) => val * commonMult);
+  // if (x.some((val) => !isInt(val))) {
+  //   x = x.map((val) => val * 2);
+  // }
+  // if (x.some((val) => !isInt(val))) {
+  //   x = x.map((val) => val * 3);
+  // }
   if (x.some((val) => !isInt(val))) {
     console.log("red flag", x);
   }
@@ -119,5 +134,5 @@ function balanceEquation(reactants, products) {
   return result;
 }
 
-const result = balanceEquation("S+HNO3", "H2SO4+NO2+H2O");
-console.log(result);
+// const result = balanceEquation("S+HNO3", "H2SO4+NO2+H2O");
+// console.log(result);
