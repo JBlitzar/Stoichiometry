@@ -41,6 +41,15 @@ function symbol2name(symbol) {
   }
 }
 
+function mathify(num) {
+  if (num.toString().includes("e")) {
+    let exponent = num.toString().split("e")[1].slice(1);
+    let base = num.toString().split("e")[0].slice(undefined, 5);
+    return `${base}\\cdot 10^{${exponent}}`;
+  }
+  return num.toString();
+}
+
 class Mole {
   constructor(name, amt = 0, equ_prefix = "") {
     this.name = name;
@@ -69,7 +78,11 @@ class Mole {
 
   from_particles(num_particles) {
     this.amt = num_particles / (6.022 * Math.pow(10, 23));
-    this.equ_prefix += `${num_particles}\\ \\mathrm{particles\\ ${this.lname}}\\cdot\\frac{1 \\mathrm{mol\\ ${this.lname}}}{6.022\\cdot10^{23}\\ \\mathrm{particles}}`;
+    this.equ_prefix += `${mathify(num_particles)}\\ \\mathrm{particles\\ ${
+      this.lname
+    }}\\cdot\\frac{1 \\mathrm{mol\\ ${
+      this.lname
+    }}}{6.022\\cdot10^{23}\\ \\mathrm{particles}}`;
   }
   from_stp(liters) {
     this.amt = liters / 22.4;
@@ -81,10 +94,10 @@ class Mole {
   }
 
   to_particles() {
-    this.equ_prefix += `\\cdot\\frac{6.022*10^{23}\\ \\mathrm{particles}}{1 \\mathrm{mol\\ ${this.lname}}}`;
-    return `${this.amt * 6.022 * Math.pow(10, 23)}\\ \\mathrm{particles\\ ${
-      this.lname
-    }}`;
+    this.equ_prefix += `\\cdot\\frac{6.022*10^{23}\\ \\mathrm{particles}}{1\\ \\mathrm{mol\\ ${this.lname}}}`;
+    return `${mathify(
+      this.amt * 6.022 * Math.pow(10, 23)
+    )}\\ \\mathrm{particles\\ ${this.lname}}`;
   }
 
   to_mass() {

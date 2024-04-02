@@ -34,31 +34,42 @@
       onload="renderMathInElement(document.body);"
     ></script>
 
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css"
+      integrity="sha512-EZLkOqwILORob+p0BXZc+Vm3RgJBOe1Iq/0fiI7r/wJgzOFZMlsqTa29UEl6v6U6gsV4uIpsNZoV32YZqrCRCQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <h1>Stoichiometry</h1>
-    <br>
+    <br />
     <center>
-      <form action="/submission/index.html">
-        <label for="equation">Chemical equation:</label><br>
-        <input type="text" id="equation" name="equation" value="CH4+O2->CO2+H2O"><br>
-        <label>Solving...</label><br><br>
-
+      <form action="submission/index.html">
+        <label for="equation">Chemical equation:</label><br />
+        <input
+          type="text"
+          id="equation"
+          name="equation"
+          value="CH4+O2->CO2+H2O"
+        /><br />
+        <label>Solving...</label><br /><br />
 
         <label for="stoichFromUnits">From</label>
-        <input type="text" id="stoichFromAmt" name="stoichFromAmt" value="2">
+        <input type="text" id="stoichFromAmt" name="stoichFromAmt" value="2" />
         <select id="stoichFromUnits" name="stoichFromUnits">
           <option value="gas">L of Gas (at STP)</option>
           <option value="particles">Representative particles</option>
           <option value="mol">Moles</option>
           <option value="mass">Mass (g)</option>
         </select>
-        <input type="text" id="stoichFromMolecule" name="stoichFromMolecule" value="CH4">
-       
-
-
+        <input
+          type="text"
+          id="stoichFromMolecule"
+          name="stoichFromMolecule"
+          value="CH4"
+        />
 
         <label for="stoichToUnits">To</label>
         <select id="stoichToUnits" name="stoichToUnits">
@@ -67,11 +78,15 @@
           <option value="mol">Moles</option>
           <option value="mass">Mass (g)</option>
         </select>
-        <input type="text" id="stoichToMolecule" name="stoichToMolecule" value="H2O"><br>
+        <input
+          type="text"
+          id="stoichToMolecule"
+          name="stoichToMolecule"
+          value="H2O"
+        /><br />
 
-        <input type="submit" value="Go">
-
+        <input type="submit" value="Go" />
       </form>
-  </center>
+    </center>
   </body>
 </html>
