@@ -38,7 +38,7 @@ if (dtype == "gas") {
 } else if(dtype == "gas_general"){
     firstMole.from_arbitrary_gas(getParam("stoichFromAmt"), getParam("temp"),getParam("pressure"))
 } else {
-  firstMole.amt = getParam("stoichFromAmt");
+  firstMole.amt = new Decimal(getParam("stoichFromAmt"));
 }
 
 secondMole = new Mole(getParam("stoichToMolecule"));
