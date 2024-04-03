@@ -133,6 +133,75 @@ function balanceEquation(reactants, products) {
 
   return result;
 }
+function balanceEquationMachineReadable(reactants, products) {
+  let ogReactants = reactants;
+  let ogProducts = products;
+  let ogCombined = ogReactants.split("+").concat(ogProducts.split("+"));
+
+  reactants = reactants.split("+").map(stringToDict);
+  products = products.split("+").map(stringToDict);
+
+  let allElements = new Set();
+  for (const compound of [...reactants, ...products]) {
+    for (const element of Object.keys(compound)) {
+      allElements.add(element);
+    }
+  }
+
+  let matrix = [];
+  for (const element of allElements) {
+    let row = reactants
+      .map((compound) => compound[element] || 0)
+      .concat(products.map((compound) => -1 * (compound[element] || 0)));
+    matrix.push(row);
+  }
+
+  let i = 0;
+  while (!checkStackedSquare(matrix)) {
+    let constraintRow = Array(reactants.length + products.length).fill(0);
+    constraintRow[i] = 1;
+    matrix.push(constraintRow);
+    i += 1;
+  }
+
+  matrix = math.matrix(matrix);
+  let b = Array(reactants.length + products.length).fill(0);
+  b.fill(1, b.length - i);
+
+  let x = math.lusolve(matrix, b)._data;
+  let commonMult = 1;
+  x.forEach((val)=>{
+
+    if(!isInt(val * commonMult)){
+      console.log((val * commonMult) % 1)
+      frac = math.fraction((val * commonMult) % 1)
+
+      
+      commonMult *= frac.d
+      
+      console.log(commonMult)
+      
+    }
+  })
+  x = x.map((val) => val * commonMult);
+  // if (x.some((val) => !isInt(val))) {
+  //   x = x.map((val) => val * 2);
+  // }
+  // if (x.some((val) => !isInt(val))) {
+  //   x = x.map((val) => val * 3);
+  // }
+  if (x.some((val) => !isInt(val))) {
+    console.log("red flag", x);
+  }
+
+  let result = {};
+  x.forEach((coef, idx) => {
+    result[ogCombined[idx]] = coef
+    
+  });
+
+  return result;
+}
 
 // const result = balanceEquation("S+HNO3", "H2SO4+NO2+H2O");
 // console.log(result);
