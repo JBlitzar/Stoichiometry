@@ -4,10 +4,12 @@ function getParam(p) {
 }
 
 equation = getParam("equation");
-result_obj = balanceEquationMachineReadable(
+result_obj = balanceEquation(
   equation.split("->")[0],
   equation.split("->")[1]
 );
+console.log(result_obj)
+console.log("Resultobj")
 // parts = balanced_equation
 //   .split(" -> ")[0]
 //   .split(" + ")

@@ -133,6 +133,48 @@ function balanceEquation(reactants, products) {
 
   return result;
 }
+
+function bruteForce(a, b, maxtries, l){
+  function* generateCombinations(n) {
+    let length = n; // Initial length of the sequence
+    let maxDigit = 1; // Maximum digit value
+
+    while (true) {
+        for (let i = 0; i < Math.pow(maxDigit + 1, length); i++) {
+            yield i.toString(maxDigit + 1)
+                .padStart(length, '0')
+                .split('')
+                .map(digit => parseInt(digit, maxDigit + 1));
+        }
+        length++; // Increase length
+        maxDigit++; // Increase maximum digit value
+    }
+}
+  function checkCriterion(a,x,b){
+    return math.multiply(a, x) == b
+  }
+
+  n = math.size(a)[0]//b.length
+  var stop_ = false
+  const generator = generateCombinations(n);
+  i = 0
+  while(!stop_){
+    if(i != 0){
+      val = generator.next().value
+      if(checkCriterion(a, val, b)){
+        stop_ = true
+        return val
+      }
+    }else if(i > maxtries){
+      return False
+    }
+    i ++;
+    
+  }
+}
+
+
+
 function balanceEquationMachineReadable(reactants, products) {
   let ogReactants = reactants;
   let ogProducts = products;
@@ -193,12 +235,19 @@ function balanceEquationMachineReadable(reactants, products) {
   if (x.some((val) => !isInt(val))) {
     console.log("red flag", x);
   }
+  // if(x.reduce((accumulator, currentValue) => accumulator + currentValue, 0) == 0){
+  //   console.log("bruteforcing...")
+  //   x = bruteForce(matrix, b, 1000, x.length)
+  // }
+
 
   let result = {};
   x.forEach((coef, idx) => {
     result[ogCombined[idx]] = coef
     
   });
+  console.log(result);
+  console.log("Result^^")
 
   return result;
 }
