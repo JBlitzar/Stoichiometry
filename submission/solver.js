@@ -4,16 +4,16 @@ function getParam(p) {
 }
 
 equation = getParam("equation");
-result_obj = balanceEquation(
+balanced_equation = balanceEquation(
   equation.split("->")[0],
   equation.split("->")[1]
 );
-console.log(result_obj)
-console.log("Resultobj")
-// parts = balanced_equation
-//   .split(" -> ")[0]
-//   .split(" + ")
-//   .concat(balanced_equation.split(" -> ")[1].split(" + "));
+// console.log(result_obj)
+// console.log("Resultobj")
+parts = balanced_equation
+  .split(" -> ")[0]
+  .split(" + ")
+  .concat(balanced_equation.split(" -> ")[1].split(" + "));
 
 console.log(parts);
 result_obj = {};
