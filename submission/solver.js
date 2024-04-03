@@ -17,7 +17,7 @@ console.log(parts);
 result_obj = {};
 parts.forEach((part) => {
     //https://regexr.com/7uc5a
-   let matches = part.match(/(\d+)(\D+\d+[a-zA-Z]*)/)
+   let matches = part.match(/^(\d+)(\D+\d+[a-zA-Z]*)/)
    if(matches){
     result_obj[matches[2]] = parseInt(matches[1]);
    }
@@ -42,6 +42,10 @@ if (dtype == "gas") {
 }
 
 secondMole = new Mole(getParam("stoichToMolecule"));
+console.log(secondMole)
+console.log(getParam("stoichFromMolecule"))
+console.log(result_obj[getParam("stoichFromMolecule")])
+console.log(result_obj[getParam("stoichToMolecule")])
 firstMole.to_other_mole(
   secondMole,
   result_obj[getParam("stoichFromMolecule")],
