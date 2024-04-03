@@ -15,19 +15,19 @@ console.log("Resultobj")
 //   .split(" + ")
 //   .concat(balanced_equation.split(" -> ")[1].split(" + "));
 
-// console.log(parts);
-// result_obj = {};
-// parts.forEach((part) => {
-//     //https://regexr.com/7uc5a
-//    let matches = part.match(/^(\d+)(\D+(\d+[a-zA-Z]*)+)/)
-//    if(matches){
-//     result_obj[matches[3]] = parseInt(matches[1]);
-//    }
-//    else{
-//     result_obj[part] = 1;
-//    }
-// });
-// console.log(result_obj);
+console.log(parts);
+result_obj = {};
+parts.forEach((part) => {
+    //https://regexr.com/7uc5a
+   let matches = part.match(/(\d+)(\D\d+[a-zA-Z]*)/)
+   if(matches){
+    result_obj[matches[2]] = parseInt(matches[1]);
+   }
+   else{
+    result_obj[part] = 1;
+   }
+});
+console.log(result_obj);
 
 firstMole = new Mole(getParam("stoichFromMolecule"));
 dtype = getParam("stoichFromUnits");
@@ -40,7 +40,7 @@ if (dtype == "gas") {
 } else if(dtype == "gas_general"){
     firstMole.from_arbitrary_gas(getParam("stoichFromAmt"), getParam("temp"),getParam("pressure"))
 } else {
-  firstMole.from_mol(getParam("stoichFromAmt"));
+  firstMole.amt = new Decimal(getParam("stoichFromAmt"));
 }
 
 secondMole = new Mole(getParam("stoichToMolecule"));
