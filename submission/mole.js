@@ -75,6 +75,10 @@ class Mole {
   parse_name() {
     this.elementDict = stringToDict(this.name);
   }
+  from_mol(mols){
+    this.amt = new Decimal(mols);
+    this.equ_prefix += `${this.amt}\\ \\mathrm{mol}`
+  }
 
   from_particles(num_particles) {
     this.amt = new Decimal(num_particles).div(6.022 * Math.pow(10, 23));
