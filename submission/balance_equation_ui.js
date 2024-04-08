@@ -4,6 +4,7 @@ function getParam(p) {
 }
 
 equation = getParam("equation");
+equation = equation.replace("=", "->")
 balanced_equation = balanceEquation(
   equation.split("->")[0],
   equation.split("->")[1]

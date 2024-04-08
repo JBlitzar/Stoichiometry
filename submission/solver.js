@@ -4,6 +4,7 @@ function getParam(p) {
 }
 
 equation = getParam("equation");
+equation = equation.replace("=", "->")
 // balanced_equation = balanceEquation(
 //   equation.split("->")[0],
 //   equation.split("->")[1]
@@ -71,7 +72,7 @@ if (out_dtype == "gas") {
 } else {
   solved_result = secondMole.amt + "\\ \\mathrm{mol}";
 }
-
+console.log(secondMole.equ_prefix)
 document.getElementById(
   "math"
 ).innerText = `$${secondMole.equ_prefix}=${solved_result}$`;

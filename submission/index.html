@@ -2,7 +2,7 @@
 <html>
   <head>
     <style>
-      .katex { 
+      text > span > .katex { 
         font-size: 1.7em !important; 
       }
     </style>
@@ -69,8 +69,21 @@
     <br>
     <text id="balanced_equation"></text>
     <br>
-    <div id="gas_constant_calculations_container" style="display:none">
-      <h2>Get gas constant</h2>
+    <div id="gas_constant_calculations_container">
+      <h2>Gas constant</h2>
+      <p>
+        Whenever we do stoichiometry calculations involving gasses at STP, one can simply convert between moles and liters using $22.4$ as a "magic factor".
+        <br>
+        $1.00\ \mathrm{mol\ H_2} \cdot \frac{22.4\ \mathrm{L}}{1\ \mathrm{mol}}=22.4\ \mathrm{L\ H_2}$
+        <br>
+        Why does this work? Well, this constant is derived from the ideal gas law, discovered by Benoît Paul Émile Clapeyron. 
+        The equation is $PV=nRT$ where P is pressure, V is volume, n is number of moles, T is the temperature, and R is a constant depending on the units. In the case of $\mathrm{\frac{L·atm}{mol·K}}$, the value for R is ${0.08205}$
+        For STP, which is 1 atm and 273 K, we get
+        <text>$\frac{(0.08205\ \frac{\mathrm{L}\cdot\mathrm{atm}}{\mathrm{mol}\cdot\mathrm{K}} \cdot 273\ \mathrm{K})}{1\ \mathrm{atm}} = \frac{22.4\ \mathrm{L}}{1\ \mathrm{mol}}$</text> 
+        For other temperatures and pressures, we need to derive a new conversion factor using the ideal gas law.
+        Note that this ideal gas law takes a few assumptions into account.
+      
+      </p>
       <br>
       <text id="gas_constant_calculations"></text>
 

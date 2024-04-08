@@ -124,7 +124,7 @@ class Mole {
 
 
   to_other_mole(other, me_amount, other_amount) {
-    this.equ_prefix += `\\cdot\\frac{${other_amount}\\ \\mathrm{mol\\ ${other.name}}}{${me_amount}\\ \\mathrm{mol\\ ${this.lname}}}`;
+    this.equ_prefix += `\\cdot\\frac{${other_amount}\\ \\mathrm{mol\\ ${other.lname}}}{${me_amount}\\ \\mathrm{mol\\ ${this.lname}}}`;
     var other_moles = (this.amt.times(other_amount)).div(me_amount);
     other.amt = other_moles;
     other.equ_prefix = this.equ_prefix;
