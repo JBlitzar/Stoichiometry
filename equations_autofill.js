@@ -19,7 +19,7 @@ function selectElement(id, valueToSelect) {
     let element = document.getElementById(id);
     element.value = valueToSelect;
 }
-molemap_values = ["gas_general", "gas", "particles", "mass"]
+molemap_values = ["gas_general", "gas", "particles", "mass", "mol"]
 
 selectElement("stoichToUnits", choose(molemap_values))
 selectElement("stoichFromUnits", choose(molemap_values))
