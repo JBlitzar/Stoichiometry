@@ -24,5 +24,5 @@ molemap_values = ["gas_general", "gas", "particles", "mass", "mol"]
 selectElement("stoichToUnits", choose(molemap_values))
 selectElement("stoichFromUnits", choose(molemap_values))
 
-document.getElementById("stoichFromAmt").value = Math.ceil(Math.random()*20)
+document.getElementById("stoichFromAmt").value = Math.ceil(Math.random()*20).toString()+".00"
 
