@@ -46,6 +46,7 @@ if (dtype == "gas") {
     firstMole.from_arbitrary_gas(getParam("stoichFromAmt"), getParam("temp"),getParam("pressure"))
 } else {
   firstMole.amt = new Decimal(getParam("stoichFromAmt"));
+  firstMole.equ_prefix = `${firstMole.amt}\\ \\mathrm{mol}`
 }
 
 secondMole = new Mole(getParam("stoichToMolecule"));
