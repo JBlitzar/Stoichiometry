@@ -7,6 +7,10 @@ function checkStackedSquare(a) {
   return true;
 }
 
+function matrixIsSkinny(a){
+  return a.length > a[0].length;
+}
+
 function isInt(a) {
   const epsilon = 0.001;
   const remainder = a % 1;
@@ -155,7 +159,7 @@ function balanceEquationMachineReadable(reactants, products) {
   }
   console.log(matrix)
   let append1AtTheEndOfB = false
-  if(checkStackedSquare(matrix)){
+  if(checkStackedSquare(matrix) || matrixIsSkinny(matrix)){
     console.log("Rectangularifying")
     let newMatrix = []
     for(const row of matrix){
@@ -167,10 +171,11 @@ function balanceEquationMachineReadable(reactants, products) {
     append1AtTheEndOfB = true;
     console.log(matrix)
   }
+
   
 
   let i = 0;
-  while (!checkStackedSquare(matrix)) {
+  while (!checkStackedSquare(matrix) && i < 10) {
     console.log('Adding constrings')
     let constraintRow = Array(reactants.length + products.length).fill(0);
     constraintRow[i] = 1;
@@ -194,6 +199,7 @@ function balanceEquationMachineReadable(reactants, products) {
   let x = math.lusolve(matrix, b)._data;
   let commonMult = 1;
   x.forEach((val)=>{
+    
 
     if(!isInt(val * commonMult)){
       console.log((val * commonMult) % 1)
@@ -205,8 +211,9 @@ function balanceEquationMachineReadable(reactants, products) {
       console.log(commonMult)
       
     }
+    
   })
-  x = x.map((val) => val * commonMult);
+  x = x.map((val) => Math.abs(val * commonMult));
   // if (x.some((val) => !isInt(val))) {
   //   x = x.map((val) => val * 2);
   // }

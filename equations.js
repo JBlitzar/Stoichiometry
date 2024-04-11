@@ -1,4 +1,4 @@
-equations = [
+window.equations = [
     "CH4+O2->CO2+H2O",
     "C3H8+O2->CO2+H2O",
     "C8H18+O2->CO2+H2O",
@@ -11,13 +11,12 @@ equations = [
     "H2+O2->H2O",
     "Na+Cl->NaCl",
 
+    "Na2S2O3+Cl2H2O->NaHSO4+HCl",
+    "Cu+HNO3->CuN2O6+NO+H2O",
+    "S+HNO3->H2SO4+NO2+H2O",
     "Al+Fe3O4->Al2O3+Fe",
     "Li3N+H2O->NH3+LiOH",
-    "Cu+HNO3->CuN2O6+NO+H2O",
     "MnO2+Al->Mn+Al2O3",
-    "Na2S2O3+Cl2H2O->NaHSO4+HCl",
     
-
-
-
+    
 ]
