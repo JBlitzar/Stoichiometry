@@ -100,7 +100,7 @@ class Mole {
   }
 
   to_particles(inp) {
-    this.equ_prefix += `\\cdot\\frac{6.022*10^{23}\\ \\mathrm{particles}}{1\\ \\mathrm{mol\\ ${this.lname}}}`;
+    this.equ_prefix += `\\cdot\\frac{6.022\\cdot10^{23}\\ \\mathrm{particles}}{1\\ \\mathrm{mol\\ ${this.lname}}}`;
     return `${mathify(
         matchPrecision(inp, this.amt * 6.022 * Math.pow(10, 23))
     )}\\ \\mathrm{particles\\ ${this.lname}}`;
