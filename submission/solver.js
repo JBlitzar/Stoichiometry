@@ -76,6 +76,6 @@ if (out_dtype == "gas") {
 console.log(secondMole.equ_prefix)
 document.getElementById(
   "math"
-).innerText = `$${secondMole.equ_prefix}=${solved_result}$`;
+).innerText = `$${secondMole.equ_prefix.replace(/(0{3,1000}[1-9]+)/i, "")}=${solved_result}$`;
 
 //alert(balanced_equation+"   "+parts)
