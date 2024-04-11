@@ -57,80 +57,34 @@ function stringToDict(chemicalFormula) {
 }
 
 function balanceEquation(reactants, products) {
-  let ogReactants = reactants;
-  let ogProducts = products;
-  let ogCombined = ogReactants.split("+").concat(ogProducts.split("+"));
-
-  reactants = reactants.split("+").map(stringToDict);
+  result_balanced = balanceEquationMachineReadable(reactants, products)
+  reactants = reactants.split("+").map(stringToDict)
   products = products.split("+").map(stringToDict);
-
-  let allElements = new Set();
-  for (const compound of [...reactants, ...products]) {
-    for (const element of Object.keys(compound)) {
-      allElements.add(element);
-    }
-  }
-
-  let matrix = [];
-  for (const element of allElements) {
-    let row = reactants
-      .map((compound) => compound[element] || 0)
-      .concat(products.map((compound) => -1 * (compound[element] || 0)));
-    matrix.push(row);
-  }
-
-  let i = 0;
-  while (!checkStackedSquare(matrix)) {
-    let constraintRow = Array(reactants.length + products.length).fill(0);
-    constraintRow[i] = 1;
-    matrix.push(constraintRow);
-    i += 1;
-  }
-  console.log(matrix)
-
-  matrix = math.matrix(matrix);
-  let b = Array(reactants.length + products.length).fill(0);
-  b.fill(1, b.length - i);
-
-  let x = math.lusolve(matrix, b)._data;
-  let commonMult = 1;
-  x.forEach((val)=>{
-
-    if(!isInt(val * commonMult)){
-      console.log((val * commonMult) % 1)
-      frac = math.fraction((val * commonMult) % 1)
-
-      
-      commonMult *= frac.d
-      
-      console.log(commonMult)
-      
-    }
-  })
-  x = x.map((val) => val * commonMult);
-  // if (x.some((val) => !isInt(val))) {
-  //   x = x.map((val) => val * 2);
-  // }
-  // if (x.some((val) => !isInt(val))) {
-  //   x = x.map((val) => val * 3);
-  // }
-  if (x.some((val) => !isInt(val))) {
-    console.log("red flag", x);
-  }
-
+  x = result_balanced[0]
   let result = "";
-  x.forEach((coef, idx) => {
+  idx = 0
+
+  for (const [name, coef] of Object.entries(result_balanced)) {
+    idx += 1;
+
+    
     let amountStr = Math.round(coef).toString();
     if (Math.floor(coef) === 1) {
       amountStr = "";
     }
-    result += amountStr + ogCombined[idx] + " ";
-    if (idx === reactants.length - 1) {
+    result += amountStr + name + " ";
+    if (idx === reactants.length) {
       result += "-> ";
-    } else if (idx !== x.length - 1) {
+    } else if (idx !== (reactants.length + products.length)) {
       result += "+ ";
     }
-  });
+    
+    
+  }
+  if(result.endsWith(" 0undefined + ")){
+    result =  result.slice(0, -" 0undefined + ".length)
+  }
+  console.log(result)
 
   return result;
 }
@@ -199,12 +153,30 @@ function balanceEquationMachineReadable(reactants, products) {
       .concat(products.map((compound) => (-1 * (compound[element] || 0))+1-1));//+1-1 turns -0 into 0
     matrix.push(row);
   }
+  console.log(matrix)
+  let append1AtTheEndOfB = false
+  if(checkStackedSquare(matrix)){
+    console.log("Rectangularifying")
+    let newMatrix = []
+    for(const row of matrix){
+      row.push(0)
+      newMatrix.push(row)
+    }
+
+    matrix = newMatrix
+    append1AtTheEndOfB = true;
+    console.log(matrix)
+  }
+  
 
   let i = 0;
   while (!checkStackedSquare(matrix)) {
     console.log('Adding constrings')
     let constraintRow = Array(reactants.length + products.length).fill(0);
     constraintRow[i] = 1;
+    if(append1AtTheEndOfB){
+      constraintRow.push(0)
+    }
     matrix.push(constraintRow);
     i += 1;
   }
@@ -213,7 +185,10 @@ function balanceEquationMachineReadable(reactants, products) {
   matrix = math.matrix(matrix);
   
   let b = Array(reactants.length + products.length).fill(0);
-  b.fill(1, b.length - i);
+  b.fill(1, b.length - (i-Number(append1AtTheEndOfB)));
+  if(append1AtTheEndOfB){
+    b.push(1)
+  }
   console.log(b)
 
   let x = math.lusolve(matrix, b)._data;
