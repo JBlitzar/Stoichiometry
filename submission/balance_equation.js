@@ -86,6 +86,7 @@ function balanceEquation(reactants, products) {
     matrix.push(constraintRow);
     i += 1;
   }
+  console.log(matrix)
 
   matrix = math.matrix(matrix);
   let b = Array(reactants.length + products.length).fill(0);
@@ -189,26 +190,31 @@ function balanceEquationMachineReadable(reactants, products) {
       allElements.add(element);
     }
   }
-
+  console.log(reactants)
+  console.log(products)
   let matrix = [];
   for (const element of allElements) {
     let row = reactants
       .map((compound) => compound[element] || 0)
-      .concat(products.map((compound) => -1 * (compound[element] || 0)));
+      .concat(products.map((compound) => (-1 * (compound[element] || 0))+1-1));//+1-1 turns -0 into 0
     matrix.push(row);
   }
 
   let i = 0;
   while (!checkStackedSquare(matrix)) {
+    console.log('Adding constrings')
     let constraintRow = Array(reactants.length + products.length).fill(0);
     constraintRow[i] = 1;
     matrix.push(constraintRow);
     i += 1;
   }
 
+  console.log(matrix)
   matrix = math.matrix(matrix);
+  
   let b = Array(reactants.length + products.length).fill(0);
   b.fill(1, b.length - i);
+  console.log(b)
 
   let x = math.lusolve(matrix, b)._data;
   let commonMult = 1;
