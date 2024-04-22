@@ -73,7 +73,7 @@ function balanceEquation(reactants, products) {
 
     
     let amountStr = Math.round(coef).toString();
-    if (Math.floor(coef) === 1) {
+    if (Math.floor(coef) == 1) {
       amountStr = "";
     }
     result += amountStr + name + " ";
