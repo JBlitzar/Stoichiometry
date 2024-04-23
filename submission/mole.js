@@ -83,13 +83,13 @@ class Mole {
     this.amt = new Decimal(num_particles).div(6.022 * Math.pow(10, 23));
     this.equ_prefix += `${mathify(num_particles)}\\ \\mathrm{particles\\ ${
       this.lname
-    }}\\cdot\\frac{1 \\mathrm{mol\\ ${
+    }}\\cdot\\frac{1\\ \\mathrm{mol\\ ${
       this.lname
     }}}{6.022\\cdot10^{23}\\ \\mathrm{particles}}`;
   }
   from_stp(liters) {
     this.amt = new Decimal(liters).div(22.4);
-    this.equ_prefix += `${liters}\\ \\mathrm{L\\ STP\\ ${this.lname}}\\cdot\\frac{1 \\mathrm{mol\\ ${this.lname}}}{22.4 \\mathrm{L\\ STP}}`;
+    this.equ_prefix += `${liters}\\ \\mathrm{L\\ STP\\ ${this.lname}}\\cdot\\frac{1\\ \\mathrm{mol\\ ${this.lname}}}{22.4 \\mathrm{L\\ STP}}`;
   }
   from_arbitrary_gas(liters, temperature, pressure) {
     let denom = new Decimal(0.08205).mul(temperature).mul(pressure);
@@ -98,7 +98,7 @@ class Mole {
   }
   from_mass(mass) {
     this.amt = new Decimal(mass).div(this.molar_mass);
-    this.equ_prefix += `${mass}\\ \\mathrm{g\\ ${this.lname}}\\cdot\\frac{1 \\mathrm{mol\\ ${this.lname}}}{${this.molar_mass}\\ \\mathrm{g}}`;
+    this.equ_prefix += `${mass}\\ \\mathrm{g\\ ${this.lname}}\\cdot\\frac{1\\ \\mathrm{mol\\ ${this.lname}}}{${this.molar_mass}\\ \\mathrm{g}}`;
   }
 
   to_particles(inp) {
@@ -109,14 +109,14 @@ class Mole {
   }
 
   to_mass(inp) {
-    this.equ_prefix += `\\cdot\\frac{${this.molar_mass} g}{1 \\mathrm{mol\\ ${this.lname}}}`;
+    this.equ_prefix += `\\cdot\\frac{${this.molar_mass}\\ \\mathrm{g}}{1\\ \\mathrm{mol\\ ${this.lname}}}`;
     return `${mathify(
       matchPrecision(inp, this.molar_mass * this.amt)
     )}\\ \\mathrm{g\\ ${this.lname}}`;
   }
 
   to_stp(inp) {
-    this.equ_prefix += `\\cdot\\frac{22.4 \\mathrm{L\\ STP}}{1 \\mathrm{mol\\ ${this.lname}}}`;
+    this.equ_prefix += `\\cdot\\frac{22.4 \\mathrm{L\\ STP}}{1\\ \\mathrm{mol\\ ${this.lname}}}`;
     return `${mathify(matchPrecision(inp, this.amt * 22.4))}\\ \\mathrm{L\\ ${
       this.lname
     }\\ STP}`;

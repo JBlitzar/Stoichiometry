@@ -22,7 +22,10 @@ function selectElement(id, valueToSelect) {
 molemap_values = ["gas_general", "gas", "particles", "mass", "mol"]
 
 selectElement("stoichToUnits", choose(molemap_values))
-selectElement("stoichFromUnits", choose(molemap_values))
+let fromUnits = choose(molemap_values)
+selectElement("stoichFromUnits", fromUnits)
 
 document.getElementById("stoichFromAmt").value = Math.ceil(Math.random()*20).toString()+".000"
-
+if(fromUnits == "particles"){
+    document.getElementById("stoichFromAmt").value = (Math.ceil(Math.random()*20)*1e23).toString()
+}
