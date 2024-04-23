@@ -1,15 +1,31 @@
+function addEquation(equation, parent) {
+  let newEl = document.createElement("li");
+  let mathEl = document.createElement("math");
+  equation_n =
+    "$\\mathrm{" +
+    equation
+      .replace(/\d+/g, function (match) {
+        return "_{" + match + "}";
+      })
+      .replace("->", "\\rightarrow ") +
+    "}$";
+  mathEl.innerText = equation;
+  newEl.appendChild(mathEl);
+  parent.appendChild(newEl);
+}
 
-window.equations.forEach((equation)=>{
+for (const [key, value] of Object.entries(window.equations_types)) {
+  console.log(`${key}: ${value}`);
+  let sublistContainer = document.createElement("li");
+  sublistContainer.innerText = key;
+  let sublist = document.createElement("ul");
+  sublistContainer.appendChild(sublist);
 
-    let newEl = document.createElement("li")
-    let mathEl = document.createElement("math")
-    equation = "$"+equation.replace(/\d+/g, function (match) {
-        return "_{" + match+"}";
-      })+"$";
-    mathEl.innerText = equation
-    newEl.appendChild(mathEl)
-    document.getElementById("list").appendChild(newEl)
-})
-setTimeout(()=>{
-    renderMathInElement(document.body);
-},1000)
+  value.forEach((equation) => {
+    addEquation(equation, sublist);
+  });
+  document.getElementById("list").appendChild(sublistContainer);
+}
+setTimeout(() => {
+  renderMathInElement(document.body);
+}, 1000);

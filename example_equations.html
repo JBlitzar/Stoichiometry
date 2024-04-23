@@ -2,7 +2,11 @@
 <html>
   <head>
     <!--Decimal.js-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/10.3.1/decimal.min.js" integrity="sha384-gVWz9cFFtyxE49hKK7MejNS5GgBB5CdxEBus/JNi5YNe5OjYraoz49fKSTf5ceoe" crossorigin="anonymous"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/decimal.js/10.3.1/decimal.min.js"
+      integrity="sha384-gVWz9cFFtyxE49hKK7MejNS5GgBB5CdxEBus/JNi5YNe5OjYraoz49fKSTf5ceoe"
+      crossorigin="anonymous"
+    ></script>
 
     <!--Math.js-->
     <script
@@ -44,19 +48,33 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // • auto-render specific keys, e.g.:
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true },
+          ],
+          // • rendering keys, e.g.:
+          throwOnError: false,
+        });
+      });
+    </script>
   </head>
   <body>
     <h1>Example equations</h1>
-    <br>
+    <br />
     <a href="index.html">Back</a>
     <br />
-    <center>
-    <ul id="list">
+    <br />
 
-    </ul>
-    </center>
-
+    <ul id="list" style="padding: 50px"></ul>
   </body>
   <script src="equations.js"></script>
-  <script defer src="equations_page.js"></script>
+  <script src="equations_page.js"></script>
 </html>
